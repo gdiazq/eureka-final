@@ -6,8 +6,8 @@
     <!-- Registrar usuario nombre, correo y un select de zona -->
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" autocomplete="off">
         <div class="mb-3">
-            <label for="nombre" class="form-label">Nombre</label>
-            <input type="text" formControlName="nombreUsuario" class="form-control" id="nombre" placeholder="Nombre">
+            <label for="nombreUsuario" class="form-label">Nombre</label>
+            <input type="text" formControlName="nombreUsuario" class="form-control" id="nombreUsuario" placeholder="Nombre">
             <span *ngIf="isFieldRequired('nombreUsuario')" class="form-text text-danger">
                 Este campo es obligatorio.
             </span>
@@ -19,21 +19,21 @@
             </span>
         </div>
         <div class="mb-3">
-            <label for="corre" class="form-label">Correo</label>
-            <input type="email" formControlName="correoUsuario" class="form-control" id="correo" placeholder="Correo">
-            <span *ngIf="isFieldRequired('nombreUsuario')" class="form-text text-danger">
+            <label for="correoUsuario" class="form-label">Correo</label>
+            <input type="email" formControlName="correoUsuario" class="form-control" id="correoUsuario" placeholder="Correo">
+            <span *ngIf="isFieldRequired('correoUsuario')" class="form-text text-danger">
                 Este campo es obligatorio.
             </span>
-            <span *ngIf="isFieldMinLength('nombreUsuario')" class="form-text text-danger">
+            <span *ngIf="isFieldMinLength('correoUsuario')" class="form-text text-danger">
                 Debe tener al menos 4 caracteres.
             </span>
-            <span *ngIf="isFieldPattern('nombreUsuario')" class="form-text text-danger">
+            <span *ngIf="isFieldPattern('correoUsuario')" class="form-text text-danger">
                 Debe ser en un formato de correo valido.
             </span>
         </div>
         <div class="mb-3">
             <label for="idZona">Selecciona el cliente</label>
-            <select id="idZona" formControlName="idZona" class="form-select" (change)="loadRecordZone()">
+            <select id="idZona" formControlName="idZona" class="form-select">
                 <option value="">Seleccione un cliente</option>
                 <option *ngFor="let zone of zones" [value]="zone.id">{{ zone.nombre }}</option>
             </select>

@@ -1,8 +1,8 @@
 export interface User {
     id?: number;
     nombre: string;
-    correo: string;
-    zona: Zone[];
+    email: string;
+    zonaId: number;
 }
 
 export interface Zone {

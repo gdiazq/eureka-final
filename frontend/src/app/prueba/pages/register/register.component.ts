@@ -13,16 +13,13 @@ import { User, Zone } from '../../interface/prueba-interface';
 export class RegisterComponent implements OnInit {
 
   public registerForm: FormGroup = this.fb.group({
-    idNombreUsuario: ['', Validators.required],
     nombreUsuario: ['', [Validators.required, Validators.minLength(4), Validators.pattern( this.validatorService.nameUsuarioPattern)]],
-    correoUsuario: ['', [Validators.required, Validators.email]],
-    idZona: ['', Validators.required],
-    zonaUsuario: ['', Validators.required]
+    correoUsuario: ['', [Validators.required, Validators.minLength(4), Validators.pattern( this.validatorService.nameEmailPattern)]],
+    idZona: ['', Validators.required]
   });
 
   public users: User[] = [];
   public zones: Zone[] = [];
-  public selectedZone: Zone | null = null;
   public recordAdded: boolean = false;
 
   constructor( 
@@ -58,28 +55,10 @@ export class RegisterComponent implements OnInit {
     );
   }
 
-  loadRecordZone(): void {
-    const selectedId = this.registerForm.value.idZona;
-    if (selectedId) {
-      this.registerService.showZoneById(selectedId).subscribe(
-        (data: Zone) => {
-          this.selectedZone = data;
-          this.registerForm.patchValue({
-            idZona: data.id,
-            zonaUsuario: data.nombre
-          });
-        },
-        (error) => {
-          console.log("Error en conseguir la zona por id", error);
-        }
-      );
-    }
-  }
-
   addRecord(user: User): void {
     this.registerService.registerUser(user).subscribe(
-      (data: User[]) => {
-        this.users = data;
+      (data: User) => {
+        this.users.push(data);
         this.recordAdded = true;
         this.registerForm.reset();
       },
@@ -98,17 +77,10 @@ export class RegisterComponent implements OnInit {
       return;
     }
     
-    const idUser = this.registerForm.value.idNombreUsuario;
     const user: User = {
-      id: idUser,
       nombre: this.registerForm.value.nombreUsuario,
-      correo: this.registerForm.value.correoUsuario,
-      zona : [
-        {
-          id: this.registerForm.value.idZona,
-          nombre: this.registerForm.value.zonaUsuario
-        }
-      ]
+      email: this.registerForm.value.correoUsuario,
+      zonaId : this.registerForm.value.idZona
     }
     this.addRecord(user);
 

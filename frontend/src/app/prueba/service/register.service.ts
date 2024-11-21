@@ -20,12 +20,8 @@ export class RegisterService {
         return this.http.get<Zone[]>(`${this.baseUrl}/zones`);
     }
 
-    showZoneById(id: number): Observable<Zone> {
-        return this.http.get<Zone>(`${this.baseUrl}/zones/${id}`);
-    }
-
-    registerUser(user: User): Observable<User[]> {
-        return this.http.post<User[]>(`${this.baseUrl}/users`, user);
+    registerUser(user: User): Observable<User> {
+        return this.http.post<User>(`${this.baseUrl}/users`, user);
     }
 
 }
