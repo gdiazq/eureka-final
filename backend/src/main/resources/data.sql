@@ -1,4 +1,5 @@
-INSERT INTO zona (nombre) VALUES ('Finanzas');
-INSERT INTO zona (nombre) VALUES ('Recursos Humanos');
-INSERT INTO zona (nombre) VALUES ('Marketing');
-INSERT INTO zona (nombre) VALUES ('TI');
+INSERT INTO zona (nombre) VALUES ('Front Developer');
+INSERT INTO zona (nombre) VALUES ('Backend Developer');
+INSERT INTO zona (nombre) VALUES ('UX/UI');
+INSERT INTO zona (nombre) VALUES ('Disenador Grafico');
+INSERT INTO zona (nombre) VALUES ('Project Manager');

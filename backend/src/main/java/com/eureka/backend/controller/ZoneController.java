@@ -2,6 +2,7 @@ package com.eureka.backend.controller;
 
 import java.util.Optional;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,7 +41,8 @@ public class ZoneController {
 
     @PostMapping
     public ResponseEntity<?> create(@RequestBody ZoneEntity zoneEntity) {
-        return ResponseEntity.ok(this.zoneService.save(zoneEntity));
+        ZoneEntity createdZone = this.zoneService.save(zoneEntity);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdZone);
     }
 
 

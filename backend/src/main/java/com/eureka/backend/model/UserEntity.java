@@ -1,6 +1,6 @@
 package com.eureka.backend.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -35,8 +35,8 @@ public class UserEntity {
     private String email;
 
     @ManyToOne
-    @JoinColumn(name="zona_id")
+    @JoinColumn(name="zona_id", nullable = false)
     @ToString.Exclude
-    @JsonBackReference
+     @JsonManagedReference
     private ZoneEntity zona;
 }

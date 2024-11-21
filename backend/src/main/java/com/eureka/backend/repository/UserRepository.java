@@ -4,12 +4,12 @@ import com.eureka.backend.model.UserEntity;
 
 import java.util.List;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
 
-public interface UserRepository extends CrudRepository<UserEntity, Long> {
+public interface UserRepository extends JpaRepository<UserEntity, Long> {
 
-    @Query("SELECT z.nombre, count(u) FROM UserEntity u JOIN u.zona z GROUP BY z.id")
+    @Query("SELECT z.nombre, COALESCE(count(u), 0) FROM ZoneEntity z LEFT JOIN UserEntity u ON u.zona.id = z.id GROUP BY z.id")
     List<Object[]> getUserCountZone();
 }    
 
