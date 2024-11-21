@@ -11,6 +11,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { ResultComponent } from './pages/result/result.component';
 import { AboutComponent } from './pages/about/about.component';
+import { TableComponent } from './pages/table/table.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { AboutComponent } from './pages/about/about.component';
     HomeComponent,
     RegisterComponent,
     ResultComponent,
-    AboutComponent
+    AboutComponent,
+    TableComponent
   ],
   imports: [
     CommonModule,

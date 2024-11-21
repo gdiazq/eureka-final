@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import swal from 'sweetalert2';
 
 import { RegisterService } from '../../service/register.service';
 import { ValidatorService } from '../../service/validator.service';
@@ -60,6 +61,11 @@ export class RegisterComponent implements OnInit {
       (data: User) => {
         this.users.push(data);
         this.recordAdded = true;
+        swal.fire({
+          title: 'Registro añadido',
+          text: 'El usuario se ha añadido correctamente',
+          icon: 'success'
+        });
         this.registerForm.reset();
       },
       (error) => {
@@ -74,7 +80,12 @@ export class RegisterComponent implements OnInit {
     this.registerForm.markAllAsTouched();
 
     if (this.registerForm.invalid) {
-      return;
+      swal.fire({
+        title: 'Error',
+        text: 'Por favor, completa todos los del formulario',
+        icon: 'error'
+      });
+      return this.registerForm.reset();
     }
     
     const user: User = {

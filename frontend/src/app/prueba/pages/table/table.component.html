@@ -1,0 +1,17 @@
+<div id="personas">
+    <h2>{{title}}</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th class="encabezado">Área</th>
+                <th class="encabezado">Cantidad de Personas</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let area of tableData">
+                <td>{{ area.nombre }}</td>
+                <td>{{ area.cantidadPersonas }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
