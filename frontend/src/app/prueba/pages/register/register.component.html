@@ -1,1 +1,47 @@
-<p>register works!</p>
+<div class="p-4 bg-light rounded shadow-sm">
+    <h1 class="display-5 mb-4">
+      Registro
+    </h1>
+
+    <!-- Registrar usuario nombre, correo y un select de zona -->
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" autocomplete="off">
+        <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre</label>
+            <input type="text" formControlName="nombreUsuario" class="form-control" id="nombre" placeholder="Nombre">
+            <span *ngIf="isFieldRequired('nombreUsuario')" class="form-text text-danger">
+                Este campo es obligatorio.
+            </span>
+            <span *ngIf="isFieldMinLength('nombreUsuario')" class="form-text text-danger">
+                Debe tener al menos 4 caracteres.
+            </span>
+            <span *ngIf="isFieldPattern('nombreUsuario')" class="form-text text-danger">
+                Debe ser en formato Aabc Aabc.
+            </span>
+        </div>
+        <div class="mb-3">
+            <label for="corre" class="form-label">Correo</label>
+            <input type="email" formControlName="correoUsuario" class="form-control" id="correo" placeholder="Correo">
+            <span *ngIf="isFieldRequired('nombreUsuario')" class="form-text text-danger">
+                Este campo es obligatorio.
+            </span>
+            <span *ngIf="isFieldMinLength('nombreUsuario')" class="form-text text-danger">
+                Debe tener al menos 4 caracteres.
+            </span>
+            <span *ngIf="isFieldPattern('nombreUsuario')" class="form-text text-danger">
+                Debe ser en un formato de correo valido.
+            </span>
+        </div>
+        <div class="mb-3">
+            <label for="idZona">Selecciona el cliente</label>
+            <select id="idZona" formControlName="idZona" class="form-select" (change)="loadRecordZone()">
+                <option value="">Seleccione un cliente</option>
+                <option *ngFor="let zone of zones" [value]="zone.id">{{ zone.nombre }}</option>
+            </select>
+            <span *ngIf="isFieldRequired('idZona')" class="form-text text-danger">
+                Este campo es obligatorio.
+            </span>
+        </div>
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <button type="button" class="btn btn-secondary mx-3" routerLink="/">Volver</button>
+    </form>
+</div>

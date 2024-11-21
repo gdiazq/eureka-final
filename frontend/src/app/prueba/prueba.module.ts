@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { SharedModule } from '../shared/shared.module';
 
@@ -22,8 +23,9 @@ import { AboutComponent } from './pages/about/about.component';
   imports: [
     CommonModule,
     HttpClientModule,
+    ReactiveFormsModule,
     SharedModule,
-    PruebaRoutingModule,
+    PruebaRoutingModule
   ],
   exports: []
 })
