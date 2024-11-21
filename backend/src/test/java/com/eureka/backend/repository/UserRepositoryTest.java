@@ -39,27 +39,24 @@ public class UserRepositoryTest {
         assertThat(userRepository.findAll()).hasSize(3);
     }
 
-    // 1. Prueba para obtener la cantidad de usuarios por zona
     @Test
     public void testGetUserCountZone() {
         List<Object[]> results = userRepository.getUserCountZone();
 
-        assertEquals(5, results.size()); // Debe haber dos zonas
+        assertEquals(5, results.size());
         assertEquals("Front Developer", results.get(0)[0]);
-        assertEquals(2L, results.get(0)[1]); // Zona 1 tiene 2 usuarios
+        assertEquals(2L, results.get(0)[1]);
         assertEquals("Backend Developer", results.get(1)[0]);
-        assertEquals(1L, results.get(1)[1]); // Zona 2 tiene 1 usuario
+        assertEquals(1L, results.get(1)[1]);
     }
 
-    // 2. Prueba para verificar que se pueden encontrar todos los usuarios
     @Test
     public void testFindAllUsers() {
         List<UserEntity> users = userRepository.findAll();
-        assertThat(users).hasSize(3); // Debe haber 3 usuarios en total
+        assertThat(users).hasSize(3);
         assertThat(users).extracting(UserEntity::getNombre).containsExactlyInAnyOrder("Juan Pérez", "Ana Gómez", "Luis Martínez");
     }
 
-    // 3. Prueba para encontrar un usuario por su ID
     @Test
     public void testFindById() {
         Optional<UserEntity> foundUser = userRepository.findById(1L);

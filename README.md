@@ -114,4 +114,5 @@ GET http://localhost:8080/users/count
 ## Sobre las pruebas
 
 - Para ejecutar las pruebas unitarias del backend con JUnit y Mockito se puede ocupar el comando mvn test o en el entorno de desarrollo elegido ir a la parte de test
+- Para ejecutar las pruebas unitarias del frontend, ejecutar el comando ng test
 
