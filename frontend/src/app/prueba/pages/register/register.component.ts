@@ -69,8 +69,12 @@ export class RegisterComponent implements OnInit {
         this.registerForm.reset();
       },
       (error) => {
-        console.log("Error al añadir el registro", error);
         this.recordAdded = false;
+        swal.fire({
+          title: 'Error al añadir el registro',
+          text: 'El usuario no pudo ser añadido.',
+          icon: 'error'
+        });
         this.registerForm.reset();
       }
     );  

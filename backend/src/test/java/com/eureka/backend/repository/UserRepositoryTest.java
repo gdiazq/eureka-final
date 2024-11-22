@@ -1,7 +1,6 @@
 package com.eureka.backend.repository;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Arrays;
 import java.util.List;
@@ -25,36 +24,42 @@ public class UserRepositoryTest {
 
     private ZoneEntity zone1;
     private ZoneEntity zone2;
+    private ZoneEntity zone3;
+    private ZoneEntity zone4;
+    private ZoneEntity zone5;
 
     @BeforeEach
     public void setUp() {
         zone1 = new ZoneEntity(1L, "Front Developer", null);
         zone2 = new ZoneEntity(2L, "Backend Developer", null);
+        zone3 = new ZoneEntity(3L, "UX/UI", null);
+        zone4 = new ZoneEntity(4L, "Disenador Grafico", null);
+        zone5 = new ZoneEntity(5L, "Project Manager", null);
 
         UserEntity user1 = new UserEntity(1L, "Juan Pérez", "juan.perez@example.com", zone1);
-        UserEntity user2 = new UserEntity(2L, "Ana Gómez", "ana.gomez@example.com", zone1);
-        UserEntity user3 = new UserEntity(3L, "Luis Martínez", "luis.martinez@example.com", zone2);
+        UserEntity user2 = new UserEntity(2L, "Ana Gómez", "ana.gomez@example.com", zone2);
+        UserEntity user3 = new UserEntity(3L, "Luis Martínez", "luis.martinez@example.com", zone3);
+        UserEntity user4 = new UserEntity(4L, "Carlos Sánchez", "carlos.sanchez@example.com", zone4);
+        UserEntity user5 = new UserEntity(5L, "María López", "maria.lopez", zone5);
 
-        userRepository.saveAll(Arrays.asList(user1, user2, user3));
-        assertThat(userRepository.findAll()).hasSize(3);
+        userRepository.saveAll(Arrays.asList(user1, user2, user3, user4, user5));
+        assertThat(userRepository.findAll()).hasSize(5);
     }
 
     @Test
     public void testGetUserCountZone() {
         List<Object[]> results = userRepository.getUserCountZone();
-
-        assertEquals(5, results.size());
-        assertEquals("Front Developer", results.get(0)[0]);
-        assertEquals(2L, results.get(0)[1]);
-        assertEquals("Backend Developer", results.get(1)[0]);
-        assertEquals(1L, results.get(1)[1]);
+        assertThat(results).hasSize(5);
+        assertThat(results).extracting(objects -> objects[0]).containsExactlyInAnyOrder("Front Developer", "Backend Developer", "UX/UI", "Disenador Grafico", "Project Manager");
+        assertThat(results).extracting(objects -> objects[1]).containsExactlyInAnyOrder(1L, 1L, 1L, 1L, 1L);
+        
     }
 
     @Test
     public void testFindAllUsers() {
         List<UserEntity> users = userRepository.findAll();
-        assertThat(users).hasSize(3);
-        assertThat(users).extracting(UserEntity::getNombre).containsExactlyInAnyOrder("Juan Pérez", "Ana Gómez", "Luis Martínez");
+        assertThat(users).hasSize(5);
+        assertThat(users).extracting(UserEntity::getNombre).containsExactlyInAnyOrder("Juan Pérez", "Ana Gómez", "Luis Martínez", "Carlos Sánchez", "María López");
     }
 
     @Test
