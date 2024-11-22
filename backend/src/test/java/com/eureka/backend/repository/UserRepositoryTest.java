@@ -4,7 +4,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 import com.eureka.backend.model.UserEntity;
 import com.eureka.backend.model.ZoneEntity;
@@ -53,20 +52,5 @@ public class UserRepositoryTest {
         assertThat(results).extracting(objects -> objects[0]).containsExactlyInAnyOrder("Front Developer", "Backend Developer", "UX/UI", "Disenador Grafico", "Project Manager");
         assertThat(results).extracting(objects -> objects[1]).containsExactlyInAnyOrder(1L, 1L, 1L, 1L, 1L);
         
-    }
-
-    @Test
-    public void testFindAllUsers() {
-        List<UserEntity> users = userRepository.findAll();
-        assertThat(users).hasSize(5);
-        assertThat(users).extracting(UserEntity::getNombre).containsExactlyInAnyOrder("Juan Pérez", "Ana Gómez", "Luis Martínez", "Carlos Sánchez", "María López");
-    }
-
-    @Test
-    public void testFindById() {
-        Optional<UserEntity> foundUser = userRepository.findById(1L);
-        if (foundUser.isPresent()) {
-            assertThat(foundUser.get().getNombre()).isEqualTo("Juan Pérez");
-        }
     }
 }

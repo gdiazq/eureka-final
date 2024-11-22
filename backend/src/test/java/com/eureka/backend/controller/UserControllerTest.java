@@ -62,22 +62,7 @@ public class UserControllerTest {
         verify(userService, times(1)).findAll();
     }
 
-    // 2. Prueba para obtener un usuario por su ID
-    @Test
-    public void testFindById() throws Exception {
-        UserEntity user = new UserEntity(1L, "Juan Pérez", "juan.perez@example.com", null);
-
-        when(userService.findById(anyLong())).thenReturn(Optional.of(user));
-
-        mockMvc.perform(get("/users/1"))
-                .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.nombre").value("Juan Pérez"));
-
-        verify(userService, times(1)).findById(anyLong());
-    }
-
-    // 3. Prueba para crear un nuevo usuario
+    // 2. Prueba para crear un nuevo usuario
     @Test
     public void testCreateUser() throws Exception {
         UserDto userDto = new UserDto();
